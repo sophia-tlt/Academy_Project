@@ -33,10 +33,6 @@ function onClick(e, popupEngineer) {
 	}
 }
 
-//document.onclick = function (e) {
-  
-//};
-
 //popup
 function onClickPopup(e, popup) {
   e = e || window.event;
@@ -48,7 +44,7 @@ function onClickPopup(e, popup) {
 					popup.style.display = 'block';
 					document.body.style.overflow = 'hidden';
 					document.onmousewheel = function (event) {
-  					eventvent.preventDefault();
+  					event.preventDefault();
 					}
 				});
       		return;
@@ -66,8 +62,8 @@ function onClickPopup(e, popup) {
 
 
 document.onclick = function(e) {
-  onClickPopup(e, popup);
   onClick(e, popupEngineer);
+  onClickPopup(e, popup);
 };
 
 }
