@@ -881,6 +881,14 @@ textarea:focus {
   margin-top: 1rem;
   padding: 1rem 5rem;
 }
+
+.status {
+  font-family: "Roboto Slab";
+  padding-bottom: 20px;
+  font-size: 20px;
+  color: #B22222;
+}
+
 /*Media*/
 @media (max-width: 1400px) {
   .main {
@@ -1470,3 +1478,4 @@ textarea:focus {
     animation: none !important;
   }
 }
+
