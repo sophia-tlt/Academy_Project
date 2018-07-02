@@ -418,6 +418,7 @@ textarea:focus {
   color: #454545;
 }
 /*test*/
+/*
 .tabs li {
 	display: inline-block;
 }
@@ -428,12 +429,12 @@ textarea:focus {
 .tabs_divs .noactive {
 	display: none;
 }
-
-.active {
+*/
+.glazing .row .active {
   display: block;
 }
 
-.noactive {
+.glazing .row .noactive {
   display: none;
 }
 /*/test*/
@@ -1485,5 +1486,10 @@ textarea:focus {
     -webkit-animation: none !important;
     animation: none !important;
   }
+}
+
+.calcSize {
+  width:40%;
+  height: 40%;
 }
 

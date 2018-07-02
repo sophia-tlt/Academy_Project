@@ -4,10 +4,6 @@ function tabs() {
 		blockContent = parent.getElementsByClassName('row'),
 		head = document.getElementsByClassName('glazing_slider')[0];
 
-		console.log(menu);
-		console.log(blockContent);
-		console.log(head);
-
 function hideTabContent (a) {              
 			for (let i = a; i<blockContent.length;i++) {
 				blockContent[i].classList.remove('active');
