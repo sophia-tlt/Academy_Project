@@ -45,6 +45,11 @@ for (let i = 0; i<form.length; i++) {
 				statusMessage.innerHTML = message.failure;
 			}
 		}
+		
+		function func () {
+			statusMessage.style.display = 'none'
+		}
+		setTimeout(func, 3000);
 	}
 
 	for (let j = 0; j< input.length; j++) {
