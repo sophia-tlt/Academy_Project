@@ -19,7 +19,6 @@ for (let j = 0; j<inputPhone.length; j++) {
 
 for (let i = 0; i<form.length; i++) {
 	let input = form[i].getElementsByTagName('input');
-
 	form[i].addEventListener('submit', function (event) {
 		event.preventDefault();
 		form[i].appendChild(statusMessage);

@@ -20,7 +20,6 @@ for (let j = 0; j<inputPhone.length; j++) {
 
 for (let i = 0; i<form.length; i++) {
 	let input = form[i].getElementsByTagName('input');
-
 	form[i].addEventListener('submit', function (event) {
 		event.preventDefault();
 		form[i].appendChild(statusMessage);
@@ -63,96 +62,120 @@ for (let i = 0; i<form.length; i++) {
 module.exports = form;
 },{}],2:[function(require,module,exports){
 function calc () {
-let calcBtn = document.getElementsByClassName('glazing_price_btn'),
-	popupCalc = document.getElementsByClassName('popup_calc')[0],
-	popupChild = document.getElementsByClassName('popup_dialog'),
-	close = document.getElementsByClassName('popup_calc_close')[0],
-	inputCalc = document.getElementsByClassName('form-control'),
-	balconIcons = document.getElementsByClassName('balcon_icons')[0],
-	balconChoose = balconIcons.getElementsByTagName('img'),
-	bigImg = document.getElementsByClassName('big_img')[0],
-	bigImgChoose = bigImg.getElementsByTagName('img'),
-	furtherBtn = document.getElementsByClassName('popup_calc_button')[0],
-	calcProfile = document.getElementsByClassName('popup_calc_profile')[0],
-	calcProfileClose = document.getElementsByClassName('popup_calc_profile_close')[0],
-	checkBox = document.getElementsByClassName('checkbox'),
-	furtherEndBtn = document.getElementsByClassName('popup_calc_profile_button')[0],
-	calcEnd = document.getElementsByClassName('popup_calc_end')[0],
-	calcEndClose = document.getElementsByClassName('popup_calc_end_close')[0],
-	form = document.getElementsByClassName('form'),
-	message = new Object();
-	message.loading = "Ожидание...";
-	message.success = "Спасибо! Ваши замеры приняты",
-	message.failure = "Что то пошло не так...";
+	let calcBtn = document.getElementsByClassName('glazing_price_btn'),
+		popupCalc = document.getElementsByClassName('popup_calc')[0],
+		popupChild = document.getElementsByClassName('popup_dialog'),
+		close = document.getElementsByClassName('popup_calc_close')[0],
+		inputCalc = document.getElementsByClassName('form-control'),
+		balconIcons = document.getElementsByClassName('balcon_icons')[0],
+		balconChoose = balconIcons.getElementsByTagName('img'),
+		bigImg = document.getElementsByClassName('big_img')[0],
+		bigImgChoose = bigImg.getElementsByTagName('img'),
+		furtherBtn = document.getElementsByClassName('popup_calc_button')[0],
+		calcProfile = document.getElementsByClassName('popup_calc_profile')[0],
+		calcProfileClose = document.getElementsByClassName('popup_calc_profile_close')[0],
+		checkBox = document.getElementsByClassName('checkbox'),
+		furtherEndBtn = document.getElementsByClassName('popup_calc_profile_button')[0],
+		calcEnd = document.getElementsByClassName('popup_calc_end')[0],
+		calcEndClose = document.getElementsByClassName('popup_calc_end_close')[0],
+		form = document.getElementsByClassName('form'),
+		message = new Object();
+		message.loading = "Ожидание...";
+		message.success = "Спасибо! Ваши замеры приняты",
+		message.failure = "Что то пошло не так...";
 
 //popup_calc
-	for (let i=0; i<calcBtn.length; i++) {
-		calcBtn[i].addEventListener('click', function () {
-			popupCalc.style.display = "block";
-			popupChild[2].onclick = function (event) {
-    			event.stopPropagation();
+		for (let i=0; i<calcBtn.length; i++) {
+			calcBtn[i].addEventListener('click', function () {
+				popupCalc.style.display = "block";
+				popupChild[2].onclick = function (event) {
+    				event.stopPropagation();
+				};
+				document.onmousewheel = function (event) {
+  					event.preventDefault();
+				}
+			});
+
+			close.addEventListener('click', function() {
+    			popupCalc.style.display = "none";
+    			document.onmousewheel = function (event) {
+  					return true;
+				}
+			});
+
+		};
+
+		for (let j=0; j<inputCalc.length; j++) {
+			if (j % 2 == 0) {
+				inputCalc[j].addEventListener('keypress', function() {
+        			setTimeout(() => {
+            			var res = /[^a-zA-Zа-яА-Я0-9]/g.exec(this.value);
+            			this.value = this.value.replace(res, '');
+        			}, 0);
+    			});
+			} else {
+				inputCalc[j].addEventListener('keypress', function() {
+        			setTimeout(() => {
+            			var res = /[^\d]/g.exec(this.value);
+            			this.value = this.value.replace(res, '');
+        			}, 0);
+    			});
 			};
-			document.onmousewheel = function (event) {
-  				event.preventDefault();
+		};
+			inputCalc[16].addEventListener('keypress', function() {
+        		setTimeout(() => {
+            		var res = /[^\d]/g.exec(this.value);
+            		this.value = this.value.replace(res, '');
+        		}, 0);
+    		});
+
+
+		function clear () {
+			for (let k=0; k<balconChoose.length;k++) {
+				bigImgChoose[k].style.display = 'none';
 			}
-		})
+		};
 
-		close.addEventListener('click', function() {
-    		popupCalc.style.display = "none";
-    		document.onmousewheel = function (event) {
-  				return true;
-			}
-		});
-
-	}
-
-	for (let j=0;j<inputCalc.length; j++) {
-			inputCalc[j].addEventListener('keypress', function() {
-        setTimeout(() => {
-            var res = /[^\d]/g.exec(this.value);
-            this.value = this.value.replace(res, '');
-        }, 0);
-    });
-	}
-
-	for (let k=0; k<balconChoose.length;k++) {
-
-		balconChoose[k].addEventListener('click', function() {
-			balconChoose[k].classList.toggle('calcSize');
-			bigImgChoose[k].style.display = 'block';
-			balconChoose[k-1].classList.remove('calcSize');
-			bigImgChoose[k-1].style.display = 'none';
-		});
-	}
+		for (let t=0;t<balconChoose.length; t++) {
+			balconChoose[t].addEventListener('click', function(){
+				clear();
+				bigImgChoose[t].style.display = 'block';
+			});
+		};
 
 //calc_profile
-	furtherBtn.addEventListener('click', function() {
-		popupCalc.style.display = "none";
-		calcProfile.style.display = "block";
-		popupChild[3].onclick = function (event) {
-    		event.stopPropagation();
-		};
-			document.onmousewheel = function (event) {
-  				event.preventDefault();
-			}
+		furtherBtn.addEventListener('click', function() {
+			popupCalc.style.display = "none";
+			calcProfile.style.display = "block";
+			popupChild[3].onclick = function (event) {
+    			event.stopPropagation();
+			};
+				document.onmousewheel = function (event) {
+  					event.preventDefault();
+				}
 		});
 
 		calcProfileClose.addEventListener('click', function() {
     		calcProfile.style.display = "none";
-    		document.onmousewheel = function (event) {
-  				return true;
-			}
-		});
-		
-		checkBox[0].addEventListener('click', function() {
-			checkBox[0].setAttribute('checked','checked');
-			checkBox[1].removeAttribute('checked');
+    			document.onmousewheel = function (event) {
+  					return true;
+				}
 		});
 
-		checkBox[1].addEventListener('click', function() {
-			checkBox[1].setAttribute('checked','checked');
-			checkBox[0].removeAttribute('checked');
-		});
+
+let inputs = calcProfile.getElementsByClassName("checkbox");
+	function clearAttr () {
+		for (let a=0; a<inputs.length; a++) {
+			inputs[a].removeAttribute('checked');
+		}
+	};
+
+		for (let b=0; b<inputs.length; b++) {
+			inputs[b].addEventListener('click', function() {
+				clearAttr();
+				inputs[b].setAttribute('checked', 'cheked');
+			});	
+		};
 
 //calc_end
 	furtherEndBtn.addEventListener('click', function() {
@@ -173,12 +196,25 @@ let calcBtn = document.getElementsByClassName('glazing_price_btn'),
 			}
 		});
 
+		let userName = calcEnd.getElementsByClassName('form-control')[0];
+		userName.addEventListener('keypress', function() {
+        		setTimeout(() => {
+            		let res = /[^a-zA-Zа-яА-Я0-9]/g.exec(this.value);
+            		this.value = this.value.replace(res, '');
+        		}, 0);
+    		});
+
 
 //form
-for (let g = 0; g<form.length; g++) {
-	let input = form[g].getElementsByTagName('input');
+for (let g = 16; g<inputCalc.length; g++) {
+	
+		let input = new Object();
+			input = {
+				allInput: inputCalc[g],
+				checkbox: inputs.hasAttribute('checked'),
 
-	form[g].addEventListener('submit', function (event) {
+			};
+	inputCalc[g].addEventListener('submit', function (event) {
 		event.preventDefault();
 		form[g].appendChild(statusMessage);
 
@@ -188,7 +224,7 @@ for (let g = 0; g<form.length; g++) {
 
 	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
-	let formData = new FormData(form);
+	let formData = new FormData(input);
 
 	request.send(formData);
 
@@ -208,15 +244,16 @@ for (let g = 0; g<form.length; g++) {
 			statusMessage.style.display = 'none'
 		}
 		setTimeout(func, 3000);
-	}
+	};
 
-	for (let j = 0; j< input.length; j++) {
-		input[j].value = '';
-	}
-});
+	for (let p = 0; p< input.length; p++) {
+		input[p].value = '';
+	};
+	});
 };
-}
 
+
+}
 
 module.exports = calc;
 },{}],3:[function(require,module,exports){
@@ -305,11 +342,11 @@ window.addEventListener('DOMContentLoaded', function () {
 },{"./ajax_form.js":1,"./calc.js":2,"./modalBtn.js":3,"./tabs.js":5}],5:[function(require,module,exports){
 function tabs() {
 	let menu = document.getElementsByClassName('glazing_block'),
-		parent = document.getElementsByClassName('glazing')[0],
+		parent = document.getElementsByClassName('container')[0],
 		blockContent = parent.getElementsByClassName('row'),
 		head = document.getElementsByClassName('glazing_slider')[0];
 
-function hideTabContent (a) {              
+		function hideTabContent (a) {              
 			for (let i = a; i<blockContent.length;i++) {
 				blockContent[i].classList.remove('active');
 				blockContent[i].classList.add('noactive');
@@ -318,24 +355,55 @@ function hideTabContent (a) {
 
 		hideTabContent(1);
 
-
- //функция показывания табов
 		function showTabContent (b) {
 			if (blockContent[b].classList.contains('noactive')) {
 				hideTabContent(0);
 				blockContent[b].classList.remove('noactive');
 				blockContent[b].classList.add('active');
+				}
+			}
+		
+		head.addEventListener('click', function(event) {
+			let target = event.target; 
+			if (target.className == 'glazing_block') { 
+				for (let j=0; j<menu.length; j++) { 
+					if (target == menu[j]) { 
+						showTabContent(j);  
+						break; 
+					}
+				}
+			}
+		})
+
+
+	let decorationMenu = document.getElementsByClassName('internal_link'),
+		decorationHead = document.getElementsByClassName('decoration_slider')[0],
+		decorationParent = document.getElementsByClassName('decoration_content')[0],
+		decorationContent = decorationContent.getElementsByClassName('row');
+
+		function hideTabDecoration (a) {              
+			for (let i = a; i<decorationContent.length;i++) {
+				decorationContent[i].classList.remove('active');
+				decorationContent[i].classList.add('noactive');
 			}
 		}
 
+		hideTabContent(1);
 
- //при помощи делегирования мы назначили на каждый таб событие
-		head.addEventListener('click', function(event) {
-			let target = event.target; //объявляем событие что мы куда то кликнули
-			if (target.className == 'glazing_block') { //событие - это нажатие на вкладку(таб)
-				for (let j=3; j<menu.length; j++) { //делаем счетчик для перебора всех вкладок которые у нас есть
-					if (target == menu[j]) { //проверяем на какую именно вкладку кликнули.То есть событие target сопоставляем с вкладкой
-						showTabContent(j);  // если на эту вкладку кликнули, тогда показываем наш контент
+		function showTabDecoration (b) {
+			if (decorationContent[b].classList.contains('noactive')) {
+				hideTabDecoration(0);
+				decorationContent[b].classList.remove('noactive');
+				decorationContent[b].classList.add('active');
+				}
+			}
+		
+		decorationHead.addEventListener('click', function(event) {
+			let target = event.target; 
+			if (target.className == 'internal_link') { 
+				for (let j=0; j<decorationMenu.length; j++) { 
+					if (target == decorationMenu[j]) { 
+						showTabDecoration(j);  
 						break; 
 					}
 				}
@@ -344,8 +412,8 @@ function hideTabContent (a) {
 
 
 
-
 }
+
 
 module.exports = tabs;
 },{}]},{},[4]);

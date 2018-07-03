@@ -430,13 +430,7 @@ textarea:focus {
 	display: none;
 }
 */
-.glazing .row .active {
-  display: block;
-}
 
-.glazing .row .noactive {
-  display: none;
-}
 /*/test*/
 /*Decoration*/
 .decoration {
@@ -1488,8 +1482,10 @@ textarea:focus {
   }
 }
 
-.calcSize {
-  width:40%;
-  height: 40%;
+.active {
+  display: block;
 }
 
+.noactive {
+  display: none;
+}
