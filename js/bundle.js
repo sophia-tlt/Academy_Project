@@ -26,7 +26,8 @@ for (let i = 0; i<form.length; i++) {
 		statusMessage.style.display = 'block';
 
 	//Ajax
-	let request = new XMLHttpRequest();
+	let REQUEST = ("onload" in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest;
+	let request = new REQUEST();
 	request.open("POST",'server.php')
 
 	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -391,7 +392,7 @@ function tabs() {
 			}
 		}
 
-		hideTabContent(1);
+		hideTabDecoration(1);
 
 		function showTabDecoration (c) {
 			if (tabContent2[c].classList.contains('noactive')) {

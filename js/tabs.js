@@ -44,7 +44,7 @@ function tabs() {
 			}
 		}
 
-		hideTabContent(1);
+		hideTabDecoration(1);
 
 		function showTabDecoration (c) {
 			if (tabContent2[c].classList.contains('noactive')) {
