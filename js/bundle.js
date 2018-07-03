@@ -23,6 +23,7 @@ for (let i = 0; i<form.length; i++) {
 	form[i].addEventListener('submit', function (event) {
 		event.preventDefault();
 		form[i].appendChild(statusMessage);
+		statusMessage.style.display = 'block';
 
 	//Ajax
 	let request = new XMLHttpRequest();
@@ -35,19 +36,23 @@ for (let i = 0; i<form.length; i++) {
 	request.send(formData);
 
 	request.onreadystatechange = function() {
+
 		if (request.readyState < 4 ) {
+			statusMessage.style.display = 'block';
 			statusMessage.innerHTML = message.loading;
 		} else if(request.readyState === 4 ) {
 			if (request.status == 200 && request.status < 300) {
+				statusMessage.style.display = 'block';
 				statusMessage.innerHTML = message.success;
 			}
 			else {
+				statusMessage.style.display = 'block';
 				statusMessage.innerHTML = message.failure;
 			}
 		}
 		
 		function func () {
-			statusMessage.style.display = 'none'
+			statusMessage.remove();
 		}
 		setTimeout(func, 3000);
 	}
@@ -341,69 +346,66 @@ window.addEventListener('DOMContentLoaded', function () {
 })
 },{"./ajax_form.js":1,"./calc.js":2,"./modalBtn.js":3,"./tabs.js":5}],5:[function(require,module,exports){
 function tabs() {
-	let menu = document.getElementsByClassName('glazing_block'),
-		parent = document.getElementsByClassName('container')[0],
-		blockContent = parent.getElementsByClassName('row'),
-		head = document.getElementsByClassName('glazing_slider')[0];
+	let tab = document.getElementsByClassName('tab'),
+		tabContent = document.getElementsByClassName('tabContent'),
+		tabClick = document.getElementsByClassName('tabClick')[0];
 
 		function hideTabContent (a) {              
-			for (let i = a; i<blockContent.length;i++) {
-				blockContent[i].classList.remove('active');
-				blockContent[i].classList.add('noactive');
+			for (let i = a; i<tabContent.length;i++) {
+				tabContent[i].classList.remove('active');
+				tabContent[i].classList.add('noactive');
 			}
 		}
 
 		hideTabContent(1);
 
 		function showTabContent (b) {
-			if (blockContent[b].classList.contains('noactive')) {
+			if (tabContent[b].classList.contains('noactive')) {
 				hideTabContent(0);
-				blockContent[b].classList.remove('noactive');
-				blockContent[b].classList.add('active');
+				tabContent[b].classList.remove('noactive');
+				tabContent[b].classList.add('active');
 				}
 			}
 		
-		head.addEventListener('click', function(event) {
+		tabClick.addEventListener('click', function(event) {
 			let target = event.target; 
-			if (target.className == 'glazing_block') { 
-				for (let j=0; j<menu.length; j++) { 
-					if (target == menu[j]) { 
+			if (target.className == 'tab') { 
+				for (let j=0; j<tab.length; j++) { 
+					if (target == tab[j]) { 
 						showTabContent(j);  
 						break; 
 					}
 				}
 			}
-		})
+		});
 
 
-	let decorationMenu = document.getElementsByClassName('internal_link'),
-		decorationHead = document.getElementsByClassName('decoration_slider')[0],
-		decorationParent = document.getElementsByClassName('decoration_content')[0],
-		decorationParentContent = decorationParent.getElementsByClassName('row')[0],
-		decorationContent = decorationParentContent.getElementsByTagName('div');
+	let tab2 = document.getElementsByClassName('tab2'),
+		tabContent2 = document.getElementsByClassName('tabContent2'),
+		tabClick2 = document.getElementsByClassName('tabClick2')[0];
 
 		function hideTabDecoration (a) {              
-			for (let e = a; e<decorationContent.length;e++) {
-				decorationContent[e].classList.remove('active');
-				decorationContent[e].classList.add('noactive');
+			for (let e = a; e<tabContent2.length;e++) {
+				tabContent2[e].classList.remove('active');
+				tabContent2[e].classList.add('noactive');
 			}
 		}
 
 		hideTabContent(1);
 
 		function showTabDecoration (c) {
-			if (decorationContent[c].classList.contains('noactive')) {
+			if (tabContent2[c].classList.contains('noactive')) {
 				hideTabDecoration(0);
-				decorationContent[c].classList.remove('noactive');
-				decorationContent[c].classList.add('active');
+				tabContent2[c].classList.remove('noactive');
+				tabContent2[c].classList.add('active');
 				}
 			}
 		
-		decorationHead.addEventListener('click', function(event) {
+		tabClick2.addEventListener('click', function(event) {
 			let target = event.target; 
-			if (target.className == 'internal_link') { 
-				for (let q=0; q<decorationMenu.length; q++) { 
-					if (target == decorationMenu[q]) { 
+			if (target.className == 'tab2') { 
+				for (let q=0; q<tab2.length; q++) { 
+					if (target == tab2[q]) { 
 						showTabDecoration(q);  
 						break; 
 					}

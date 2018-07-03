@@ -22,9 +22,11 @@ for (let i = 0; i<form.length; i++) {
 	form[i].addEventListener('submit', function (event) {
 		event.preventDefault();
 		form[i].appendChild(statusMessage);
+		statusMessage.style.display = 'block';
 
 	//Ajax
-	let request = new XMLHttpRequest();
+	let REQUEST = ("onload" in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest;
+	let request = new REQUEST();
 	request.open("POST",'server.php')
 
 	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -34,19 +36,23 @@ for (let i = 0; i<form.length; i++) {
 	request.send(formData);
 
 	request.onreadystatechange = function() {
+
 		if (request.readyState < 4 ) {
+			statusMessage.style.display = 'block';
 			statusMessage.innerHTML = message.loading;
 		} else if(request.readyState === 4 ) {
 			if (request.status == 200 && request.status < 300) {
+				statusMessage.style.display = 'block';
 				statusMessage.innerHTML = message.success;
 			}
 			else {
+				statusMessage.style.display = 'block';
 				statusMessage.innerHTML = message.failure;
 			}
 		}
 		
 		function func () {
-			statusMessage.style.display = 'none'
+			statusMessage.remove();
 		}
 		setTimeout(func, 3000);
 	}
