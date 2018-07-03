@@ -37,31 +37,32 @@ function tabs() {
 	let decorationMenu = document.getElementsByClassName('internal_link'),
 		decorationHead = document.getElementsByClassName('decoration_slider')[0],
 		decorationParent = document.getElementsByClassName('decoration_content')[0],
-		decorationContent = decorationContent.getElementsByClassName('row');
+		decorationParentContent = decorationParent.getElementsByClassName('row')[0],
+		decorationContent = decorationParentContent.getElementsByTagName('div');
 
 		function hideTabDecoration (a) {              
-			for (let i = a; i<decorationContent.length;i++) {
-				decorationContent[i].classList.remove('active');
-				decorationContent[i].classList.add('noactive');
+			for (let e = a; e<decorationContent.length;e++) {
+				decorationContent[e].classList.remove('active');
+				decorationContent[e].classList.add('noactive');
 			}
 		}
 
 		hideTabContent(1);
 
-		function showTabDecoration (b) {
-			if (decorationContent[b].classList.contains('noactive')) {
+		function showTabDecoration (c) {
+			if (decorationContent[c].classList.contains('noactive')) {
 				hideTabDecoration(0);
-				decorationContent[b].classList.remove('noactive');
-				decorationContent[b].classList.add('active');
+				decorationContent[c].classList.remove('noactive');
+				decorationContent[c].classList.add('active');
 				}
 			}
 		
 		decorationHead.addEventListener('click', function(event) {
 			let target = event.target; 
 			if (target.className == 'internal_link') { 
-				for (let j=0; j<decorationMenu.length; j++) { 
-					if (target == decorationMenu[j]) { 
-						showTabDecoration(j);  
+				for (let q=0; q<decorationMenu.length; q++) { 
+					if (target == decorationMenu[q]) { 
+						showTabDecoration(q);  
 						break; 
 					}
 				}

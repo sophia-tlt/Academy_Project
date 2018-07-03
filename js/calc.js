@@ -148,7 +148,7 @@ for (let g = 16; g<inputCalc.length; g++) {
 		let input = new Object();
 			input = {
 				allInput: inputCalc[g],
-				checkbox: inputs.hasAttribute('checked'),
+				//checkbox: inputs.hasAttribute('checked'),
 
 			};
 	inputCalc[g].addEventListener('submit', function (event) {
