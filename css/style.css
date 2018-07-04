@@ -1484,12 +1484,13 @@ textarea:focus {
 }
 
 .active {
-  display: block;
+  display: block !important;
 }
 
 .noactive {
-  display: none;
+  display: none !important;
 }
+
 .myModal {
   display: none;
   position: fixed;

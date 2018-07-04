@@ -17,19 +17,22 @@ function tabs() {
 				hideTabContent(0);
 				tabContent[b].classList.remove('noactive');
 				tabContent[b].classList.add('active');
-				}
 			}
+		}
 		
 		tabClick.addEventListener('click', function(event) {
-			let target = event.target; 
-			if (target.className == 'tab') { 
-				for (let j=0; j<tab.length; j++) { 
-					if (target == tab[j]) { 
+			let target = event.target;
+			
+			//if (target.className == 'tab') { 
+				for (let j=0; j<tab.length; j++) {
+					let tabA = tab[j].getElementsByTagName('a'),
+						tabIMG = tab[j].getElementsByTagName('img');
+					if (target == tab[j] || tabA[j] || tabIMG[j]) { 
 						showTabContent(j);  
 						break; 
 					}
 				}
-			}
+			//}
 		});
 
 
@@ -56,14 +59,13 @@ function tabs() {
 		
 		tabClick2.addEventListener('click', function(event) {
 			let target = event.target; 
-			if (target.className == 'tab2') { 
-				for (let q=0; q<tab2.length; q++) { 
-					if (target == tab2[q]) { 
+				for (let q=0; q<tab2.length; q++) {
+				let tabClickA2 = tab2[q].getElementsByTagName('a'); 
+					if (target == tab2[q] || tabClickA2[q]) { 
 						showTabDecoration(q);  
 						break; 
 					}
 				}
-			}
 		})
 
 
