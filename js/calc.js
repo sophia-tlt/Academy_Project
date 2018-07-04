@@ -46,14 +46,14 @@ function calc () {
 			if (j % 2 == 0) {
 				inputCalc[j].addEventListener('keypress', function() {
         			setTimeout(() => {
-            			var res = /[^a-zA-Zа-яА-Я0-9]/g.exec(this.value);
-            			this.value = this.value.replace(res, '');
+            			let resA = /[^a-zA-Zа-яА-Я0-9]/g.exec(this.value);
+            			this.value = this.value.replace(resA, '');
         			}, 0);
     			});
 			} else {
 				inputCalc[j].addEventListener('keypress', function() {
         			setTimeout(() => {
-            			var res = /[^\d]/g.exec(this.value);
+            			let res = /[^\d]/g.exec(this.value);
             			this.value = this.value.replace(res, '');
         			}, 0);
     			});
@@ -61,11 +61,17 @@ function calc () {
 		};
 			inputCalc[16].addEventListener('keypress', function() {
         		setTimeout(() => {
-            		var res = /[^\d]/g.exec(this.value);
+            		let res = /[^\d]/g.exec(this.value);
             		this.value = this.value.replace(res, '');
         		}, 0);
     		});
-
+			let UserName = document.getElementsByClassName('UserName')[0];
+			 	UserName.addEventListener('keypress', function() {
+        			setTimeout(() => {
+            			let resA = /[^a-zA-Zа-яА-Я0-9]/g.exec(this.value);
+            			this.value = this.value.replace(resA, '');
+        			}, 0);
+    			});
 
 		function clear () {
 			for (let k=0; k<balconChoose.length;k++) {
@@ -111,8 +117,7 @@ let inputs = calcProfile.getElementsByClassName("checkbox");
 			inputs[b].addEventListener('click', function() {
 				clearAttr();
 				inputs[b].setAttribute('checked', 'cheked');
-			});	
-		};
+		});
 
 //calc_end
 	furtherEndBtn.addEventListener('click', function() {
@@ -148,7 +153,7 @@ for (let g = 16; g<inputCalc.length; g++) {
 		let input = new Object();
 			input = {
 				allInput: inputCalc[g],
-				//checkbox: inputs.hasAttribute('checked'),
+				checkbox: inputs[b],
 
 			};
 	inputCalc[g].addEventListener('submit', function (event) {
@@ -189,7 +194,7 @@ for (let g = 16; g<inputCalc.length; g++) {
 	});
 };
 
-
+}
 }
 
 module.exports = calc;

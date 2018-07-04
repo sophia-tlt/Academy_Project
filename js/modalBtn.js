@@ -61,7 +61,33 @@ popup.addEventListener('click', function(event){
 	}
 });
 
+//modal after 1min
+function afterMin () {
+	popup.style.display = "block";
+		popupChild[0].onclick = function (event) {
+    	event.stopPropagation();
+		};
+		document.onmousewheel = function (event) {
+  			event.preventDefault();
+		}
 
+	popupClose.addEventListener('click', function() {
+    	popup.style.display = "none";
+    	document.onmousewheel = function (event) {
+  			return true;
+		}
+	});
+
+
+	popup.addEventListener('click', function(event){
+    	popup.style.display = "none";
+    	document.onmousewheel = function (event) {
+  			return true;
+		}
+	});
+};
+
+setTimeout(afterMin, 60000);
 }
 
 module.exports = modalBtn;

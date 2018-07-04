@@ -115,14 +115,14 @@ function calc () {
 			if (j % 2 == 0) {
 				inputCalc[j].addEventListener('keypress', function() {
         			setTimeout(() => {
-            			var res = /[^a-zA-Zа-яА-Я0-9]/g.exec(this.value);
-            			this.value = this.value.replace(res, '');
+            			let resA = /[^a-zA-Zа-яА-Я0-9]/g.exec(this.value);
+            			this.value = this.value.replace(resA, '');
         			}, 0);
     			});
 			} else {
 				inputCalc[j].addEventListener('keypress', function() {
         			setTimeout(() => {
-            			var res = /[^\d]/g.exec(this.value);
+            			let res = /[^\d]/g.exec(this.value);
             			this.value = this.value.replace(res, '');
         			}, 0);
     			});
@@ -130,11 +130,17 @@ function calc () {
 		};
 			inputCalc[16].addEventListener('keypress', function() {
         		setTimeout(() => {
-            		var res = /[^\d]/g.exec(this.value);
+            		let res = /[^\d]/g.exec(this.value);
             		this.value = this.value.replace(res, '');
         		}, 0);
     		});
-
+			let UserName = document.getElementsByClassName('UserName')[0];
+			 	UserName.addEventListener('keypress', function() {
+        			setTimeout(() => {
+            			let resA = /[^a-zA-Zа-яА-Я0-9]/g.exec(this.value);
+            			this.value = this.value.replace(resA, '');
+        			}, 0);
+    			});
 
 		function clear () {
 			for (let k=0; k<balconChoose.length;k++) {
@@ -180,8 +186,7 @@ let inputs = calcProfile.getElementsByClassName("checkbox");
 			inputs[b].addEventListener('click', function() {
 				clearAttr();
 				inputs[b].setAttribute('checked', 'cheked');
-			});	
-		};
+		});
 
 //calc_end
 	furtherEndBtn.addEventListener('click', function() {
@@ -217,7 +222,7 @@ for (let g = 16; g<inputCalc.length; g++) {
 		let input = new Object();
 			input = {
 				allInput: inputCalc[g],
-				//checkbox: inputs.hasAttribute('checked'),
+				checkbox: inputs[b],
 
 			};
 	inputCalc[g].addEventListener('submit', function (event) {
@@ -258,7 +263,7 @@ for (let g = 16; g<inputCalc.length; g++) {
 	});
 };
 
-
+}
 }
 
 module.exports = calc;
@@ -326,17 +331,93 @@ popup.addEventListener('click', function(event){
 	}
 });
 
+//modal after 1min
+function afterMin () {
+	popup.style.display = "block";
+		popupChild[0].onclick = function (event) {
+    	event.stopPropagation();
+		};
+		document.onmousewheel = function (event) {
+  			event.preventDefault();
+		}
 
+	popupClose.addEventListener('click', function() {
+    	popup.style.display = "none";
+    	document.onmousewheel = function (event) {
+  			return true;
+		}
+	});
+
+
+	popup.addEventListener('click', function(event){
+    	popup.style.display = "none";
+    	document.onmousewheel = function (event) {
+  			return true;
+		}
+	});
+};
+
+setTimeout(afterMin, 60000);
 }
 
 module.exports = modalBtn;
 },{}],4:[function(require,module,exports){
+function pic() {
+	let pictureParent = document.getElementsByClassName('pictureParent')[0],
+		pictureParentDiv = document.getElementsByClassName('pictureParentDiv'),
+		myModal = document.getElementsByClassName('myModal')[0],
+		modalImg = document.getElementById('img01'),
+		closePic = document.getElementsByClassName('closePic')[0];
+		
+
+		for (let j=0; j<pictureParentDiv.length; j++) {
+			let picture = pictureParentDiv[j].getElementsByTagName('a');  //получаем все ссылки
+			for (let i=0; i<picture.length; i++) {
+				picture[i].setAttribute('data-fancybox', 'gallery'); //присваиваем каждой ссылке атрибут
+				/*let pictureImg = picture[i].getElementsByClassName('myPic'); //получаем все img
+				for(let g=0; g<pictureImg.length; g++){*/
+					let attr = picture[i].getAttribute('href')
+					picture[i].addEventListener('click', function () { //создаем функцию вызова модального окна
+						myModal.style.display = 'block'; //показываем 
+						event.stopPropagation();
+						document.onmousewheel = function (event) { //запрещаем прокрутку страницы
+  							event.preventDefault();
+						}
+						let modalContent = document.getElementsByClassName('modal_content')[0];
+							modalContent.setAttribute('href',attr); //присваиваем каждому модальному окну его картинку
+						
+					});
+
+					closePic.addEventListener('click', function() {
+    					myModal.style.display = "none";
+    					document.onmousewheel = function (event) {
+  						return true;
+						}
+					});
+
+
+					pictureParent.addEventListener('click', function(event){
+    					myModal.style.display = "none";
+    					document.onmousewheel = function (event) {
+  							return true;
+						}
+					});
+				//}
+			}
+		}
+		
+		
+		
+
+}
+module.exports = pic;
+},{}],5:[function(require,module,exports){
 window.addEventListener('DOMContentLoaded', function () {
 	let modalBtn = require('./modalBtn.js');
 	let form = require('./ajax_form.js');
 	let tabs = require('./tabs.js');
 	let calc = require('./calc.js');
-
+	let pic = require('./pic.js');
 
 
 
@@ -344,8 +425,9 @@ window.addEventListener('DOMContentLoaded', function () {
 	form();
 	tabs();
 	calc();
+	pic();
 })
-},{"./ajax_form.js":1,"./calc.js":2,"./modalBtn.js":3,"./tabs.js":5}],5:[function(require,module,exports){
+},{"./ajax_form.js":1,"./calc.js":2,"./modalBtn.js":3,"./pic.js":4,"./tabs.js":6}],6:[function(require,module,exports){
 function tabs() {
 	let tab = document.getElementsByClassName('tab'),
 		tabContent = document.getElementsByClassName('tabContent'),
@@ -420,4 +502,4 @@ function tabs() {
 
 
 module.exports = tabs;
-},{}]},{},[4]);
+},{}]},{},[5]);

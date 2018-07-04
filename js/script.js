@@ -3,7 +3,7 @@ window.addEventListener('DOMContentLoaded', function () {
 	let form = require('./ajax_form.js');
 	let tabs = require('./tabs.js');
 	let calc = require('./calc.js');
-
+	let pic = require('./pic.js');
 
 
 
@@ -11,4 +11,5 @@ window.addEventListener('DOMContentLoaded', function () {
 	form();
 	tabs();
 	calc();
+	pic();
 })
