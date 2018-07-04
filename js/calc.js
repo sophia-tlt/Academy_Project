@@ -142,11 +142,6 @@ let inputs = calcProfile.getElementsByClassName("checkbox");
 //form
 function ajaxForm () {
 	for (let g = 16; g<inputCalc.length; g++) {
-		let input = {
-				allInput: inputCalc[g],
-				checkbox: inputs[b],
-			};
-		//console.log(JSON.stringify(input))
 
 	inputCalc[g].addEventListener('submit', function (event) {
 		event.preventDefault();
@@ -158,7 +153,14 @@ function ajaxForm () {
 
 	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
-	let formData = new FormData(input);
+	const formData = new FormData(form);
+			let jsonObject = {
+				allInput: inputCalc[g],
+				checkbox: inputs[b],
+			};
+			for (const [key,value] of formData.entries()) {
+				jsonObject[key] = value;
+			}
 
 	request.send(formData);
 
