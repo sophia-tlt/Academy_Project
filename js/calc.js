@@ -20,6 +20,7 @@ function calc () {
 		message.loading = "Ожидание...";
 		message.success = "Спасибо! Ваши замеры приняты",
 		message.failure = "Что то пошло не так...";
+		//console.log(form);
 
 //popup_calc
 		for (let i=0; i<calcBtn.length; i++) {
@@ -41,16 +42,15 @@ function calc () {
 			});
 
 		};
-
 		for (let j=0; j<inputCalc.length; j++) {
-			if (j % 2 == 0) {
+			if (j % 2 == 0 || j === 19) {
 				inputCalc[j].addEventListener('keypress', function() {
         			setTimeout(() => {
             			let resA = /[^a-zA-Zа-яА-Я0-9]/g.exec(this.value);
             			this.value = this.value.replace(resA, '');
         			}, 0);
     			});
-			} else {
+			} else{
 				inputCalc[j].addEventListener('keypress', function() {
         			setTimeout(() => {
             			let res = /[^\d]/g.exec(this.value);
@@ -65,13 +65,6 @@ function calc () {
             		this.value = this.value.replace(res, '');
         		}, 0);
     		});
-			let UserName = document.getElementsByClassName('UserName')[0];
-			 	UserName.addEventListener('keypress', function() {
-        			setTimeout(() => {
-            			let resA = /[^a-zA-Zа-яА-Я0-9]/g.exec(this.value);
-            			this.value = this.value.replace(resA, '');
-        			}, 0);
-    			});
 
 		function clear () {
 			for (let k=0; k<balconChoose.length;k++) {
@@ -113,12 +106,11 @@ let inputs = calcProfile.getElementsByClassName("checkbox");
 		}
 	};
 
-		for (let b=0; b<inputs.length; b++) {
-			inputs[b].addEventListener('click', function() {
-				clearAttr();
-				inputs[b].setAttribute('checked', 'cheked');
+	for (let b=0; b<inputs.length; b++) {
+		inputs[b].addEventListener('click', function() {
+			clearAttr();
+			inputs[b].setAttribute('checked', 'cheked');
 		});
-
 //calc_end
 	furtherEndBtn.addEventListener('click', function() {
 		calcProfile.style.display = "none";
@@ -148,14 +140,14 @@ let inputs = calcProfile.getElementsByClassName("checkbox");
 
 
 //form
-for (let g = 16; g<inputCalc.length; g++) {
-	
-		let input = new Object();
-			input = {
+function ajaxForm () {
+	for (let g = 16; g<inputCalc.length; g++) {
+		let input = {
 				allInput: inputCalc[g],
 				checkbox: inputs[b],
-
 			};
+		//console.log(JSON.stringify(input))
+
 	inputCalc[g].addEventListener('submit', function (event) {
 		event.preventDefault();
 		form[g].appendChild(statusMessage);
@@ -193,8 +185,10 @@ for (let g = 16; g<inputCalc.length; g++) {
 	};
 	});
 };
-
 }
 }
 
+	ajaxForm();
+
+}
 module.exports = calc;
