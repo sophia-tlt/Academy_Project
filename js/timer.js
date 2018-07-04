@@ -57,7 +57,6 @@ function setClock (id, endTime) {
 }
 
 setClock('timer', deadline);
-
 }
 
 

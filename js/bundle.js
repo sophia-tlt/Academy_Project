@@ -89,7 +89,7 @@ function calc () {
 		message.loading = "Ожидание...";
 		message.success = "Спасибо! Ваши замеры приняты",
 		message.failure = "Что то пошло не так...";
-		//console.log(form);
+		console.log(balconChoose);
 
 //popup_calc
 		for (let i=0; i<calcBtn.length; i++) {
@@ -145,6 +145,9 @@ function calc () {
 			balconChoose[t].addEventListener('click', function(){
 				clear();
 				bigImgChoose[t].style.display = 'block';
+				for(let y=0; y<balconChoose.length; y++) {
+						balconChoose[y].style.width = '40%';
+					}
 			});
 		};
 
@@ -152,6 +155,7 @@ function calc () {
 		furtherBtn.addEventListener('click', function() {
 			popupCalc.style.display = "none";
 			calcProfile.style.display = "block";
+			
 			popupChild[3].onclick = function (event) {
     			event.stopPropagation();
 			};
@@ -542,7 +546,6 @@ function setClock (id, endTime) {
 }
 
 setClock('timer', deadline);
-
 }
 
 
