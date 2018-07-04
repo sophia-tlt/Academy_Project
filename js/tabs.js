@@ -36,7 +36,9 @@ function tabs() {
 	let tab2 = document.getElementsByClassName('tab2'),
 		tabContent2 = document.getElementsByClassName('tabContent2'),
 		tabClick2 = document.getElementsByClassName('tabClick2')[0];
-
+console.log(tab2);
+console.log(tabContent2);
+console.log(tabClick2);
 		function hideTabDecoration (a) {              
 			for (let e = a; e<tabContent2.length;e++) {
 				tabContent2[e].classList.remove('active');

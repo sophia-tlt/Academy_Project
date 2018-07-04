@@ -4,7 +4,7 @@ window.addEventListener('DOMContentLoaded', function () {
 	let tabs = require('./tabs.js');
 	let calc = require('./calc.js');
 	let pic = require('./pic.js');
-
+	let timer = require('./timer.js');
 
 
 	modalBtn();
@@ -12,4 +12,5 @@ window.addEventListener('DOMContentLoaded', function () {
 	tabs();
 	calc();
 	pic();
+	timer();
 })

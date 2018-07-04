@@ -211,11 +211,6 @@ let inputs = calcProfile.getElementsByClassName("checkbox");
 //form
 function ajaxForm () {
 	for (let g = 16; g<inputCalc.length; g++) {
-		let input = {
-				allInput: inputCalc[g],
-				checkbox: inputs[b],
-			};
-		//console.log(JSON.stringify(input))
 
 	inputCalc[g].addEventListener('submit', function (event) {
 		event.preventDefault();
@@ -227,7 +222,14 @@ function ajaxForm () {
 
 	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
-	let formData = new FormData(input);
+	const formData = new FormData(form);
+			let jsonObject = {
+				allInput: inputCalc[g],
+				checkbox: inputs[b],
+			};
+			for (const [key,value] of formData.entries()) {
+				jsonObject[key] = value;
+			}
 
 	request.send(formData);
 
@@ -359,50 +361,33 @@ module.exports = modalBtn;
 function pic() {
 	let pictureParent = document.getElementsByClassName('pictureParent')[0],
 		pictureParentDiv = document.getElementsByClassName('pictureParentDiv'),
-		myModal = document.getElementsByClassName('myModal')[0],
-		modalImg = document.getElementById('img01'),
-		closePic = document.getElementsByClassName('closePic')[0];
+		myModal = document.getElementById('myModal'),
+		closePic = document.getElementsByClassName('closePic')[0],
+		picAction = document.getElementsByClassName('picAction'),
+		modalContent = document.getElementsByClassName('modal_content')[0];
+
 		
+		for (let i=0; i<picAction.length; i++) {
+			picAction[i].addEventListener('click', function(event) {
+				event.preventDefault();
+    			myModal.style.display = "block";
+				let attr = picAction[i].getAttribute('href');
+				modalContent.setAttribute('src', attr);
+			});
+			
 
-		for (let j=0; j<pictureParentDiv.length; j++) {
-			let picture = pictureParentDiv[j].getElementsByTagName('a');  //получаем все ссылки
-			for (let i=0; i<picture.length; i++) {
-				picture[i].setAttribute('data-fancybox', 'gallery'); //присваиваем каждой ссылке атрибут
-				/*let pictureImg = picture[i].getElementsByClassName('myPic'); //получаем все img
-				for(let g=0; g<pictureImg.length; g++){*/
-					let attr = picture[i].getAttribute('href')
-					picture[i].addEventListener('click', function () { //создаем функцию вызова модального окна
-						myModal.style.display = 'block'; //показываем 
-						event.stopPropagation();
-						document.onmousewheel = function (event) { //запрещаем прокрутку страницы
-  							event.preventDefault();
-						}
-						let modalContent = document.getElementsByClassName('modal_content')[0];
-							modalContent.setAttribute('href',attr); //присваиваем каждому модальному окну его картинку
-						
-					});
-
-					closePic.addEventListener('click', function() {
-    					myModal.style.display = "none";
-    					document.onmousewheel = function (event) {
-  						return true;
-						}
-					});
+			closePic.addEventListener('click', function() {
+    			myModal.style.display = "none";
+			});
 
 
-					pictureParent.addEventListener('click', function(event){
-    					myModal.style.display = "none";
-    					document.onmousewheel = function (event) {
-  							return true;
-						}
-					});
-				//}
-			}
-		}
+			pictureParent.addEventListener('click', function(event){
+    			myModal.style.display = "none";
+			});
 		
 		
 		
-
+}
 }
 module.exports = pic;
 },{}],5:[function(require,module,exports){
@@ -412,7 +397,7 @@ window.addEventListener('DOMContentLoaded', function () {
 	let tabs = require('./tabs.js');
 	let calc = require('./calc.js');
 	let pic = require('./pic.js');
-
+	let timer = require('./timer.js');
 
 
 	modalBtn();
@@ -420,8 +405,9 @@ window.addEventListener('DOMContentLoaded', function () {
 	tabs();
 	calc();
 	pic();
+	timer();
 })
-},{"./ajax_form.js":1,"./calc.js":2,"./modalBtn.js":3,"./pic.js":4,"./tabs.js":6}],6:[function(require,module,exports){
+},{"./ajax_form.js":1,"./calc.js":2,"./modalBtn.js":3,"./pic.js":4,"./tabs.js":6,"./timer.js":7}],6:[function(require,module,exports){
 function tabs() {
 	let tab = document.getElementsByClassName('tab'),
 		tabContent = document.getElementsByClassName('tabContent'),
@@ -460,7 +446,9 @@ function tabs() {
 	let tab2 = document.getElementsByClassName('tab2'),
 		tabContent2 = document.getElementsByClassName('tabContent2'),
 		tabClick2 = document.getElementsByClassName('tabClick2')[0];
-
+console.log(tab2);
+console.log(tabContent2);
+console.log(tabClick2);
 		function hideTabDecoration (a) {              
 			for (let e = a; e<tabContent2.length;e++) {
 				tabContent2[e].classList.remove('active');
@@ -496,4 +484,69 @@ function tabs() {
 
 
 module.exports = tabs;
+},{}],7:[function(require,module,exports){
+function timer() {
+	let deadline = '2018-07-50';
+
+function getTimeRemaining(endTime) {  
+	let t = Date.parse(endTime) - Date.parse(new Date()), 
+		seconds = Math.floor( (t/1000) %60 ), 
+		minutes = Math.floor( (t/1000/60) %60 ), 
+		hours = Math.floor( (t/(1000*60*60)) %24),
+		days = Math.floor(t/(1000*60*60*24));
+		return {  
+			'total': t, 
+			'days': days,
+			'hours': hours,
+			'minutes':minutes, 
+			'seconds':seconds
+		};
+		}
+
+function setClock (id, endTime) { 
+	let timer = document.getElementById(id),
+		days = timer.querySelector('.timer-days'),
+		hours = timer.querySelector('.hours'), 
+		minutes = timer.querySelector('.minutes'),
+		seconds = timer.querySelector('.seconds');
+		let timeInterval = setInterval(updateClock,1000);  
+
+	function updateClock() {   
+		let t = getTimeRemaining(endTime);  
+		days.innerHTML = t.days;
+			if (t.days<10) {
+				days.innerHTML = '0'+t.days;
+			};
+		hours.innerHTML = t.hours;
+			if (t.hours<10) {
+				hours.innerHTML = '0'+ t.hours;
+			};
+		minutes.innerHTML = t.minutes;
+			if (t.minutes<10) {
+				minutes.innerHTML = '0'+t.minutes;
+			};
+		seconds.innerHTML = t.seconds;
+			if (t.seconds<10) {
+				seconds.innerHTML = '0'+t.seconds;
+			};
+
+		if (t.total <=0) {
+			clearInterval(timeInterval);
+			days.innerHTML = '00';
+			hours.innerHTML = '00';
+			minutes.innerHTML = '00';
+			seconds.innerHTML = '00';
+		}
+
+	}
+
+	updateClock();
+}
+
+setClock('timer', deadline);
+
+}
+
+
+module.exports = timer;
 },{}]},{},[5]);
