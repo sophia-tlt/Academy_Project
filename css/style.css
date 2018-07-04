@@ -1530,11 +1530,28 @@ textarea:focus {
 
 .myTimer {
   display: flex;
-  width:100%;
+  width:970px;
 }
 
 .myTimer_left {
   display: flex;
   flex-direction: column; 
-  width:50%;
+  width:450px;
+  
+}
+
+.myTimer_right {
+  width:450px;
+  margin:0 0 0 100px;
+}
+
+.timer {
+  display: flex;
+  flex-direction:column;
+  padding:15px;
+  background-color: white;
+  height: 150px;
+  width:400px;
+  border-radius: 10px;
+  font-size: 2.2rem;
 }
