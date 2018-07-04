@@ -1527,3 +1527,14 @@ textarea:focus {
     border: none;
     background: transparent;
 }
+
+.myTimer {
+  display: flex;
+  width:100%;
+}
+
+.myTimer_left {
+  display: flex;
+  flex-direction: column; 
+  width:50%;
+}
