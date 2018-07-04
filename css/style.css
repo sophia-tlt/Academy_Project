@@ -1555,3 +1555,12 @@ textarea:focus {
   border-radius: 10px;
   font-size: 2.2rem;
 }
+
+.timer-days, .hours, .minutes, .seconds {
+  background-color:#424242;
+  border-radius: 5px;
+  height: 20px;
+  width:10px;
+  color: white;
+ 
+}

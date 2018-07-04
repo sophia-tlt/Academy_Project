@@ -20,7 +20,7 @@ function calc () {
 		message.loading = "Ожидание...";
 		message.success = "Спасибо! Ваши замеры приняты",
 		message.failure = "Что то пошло не так...";
-		console.log(balconChoose);
+
 
 //popup_calc
 		for (let i=0; i<calcBtn.length; i++) {
