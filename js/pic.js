@@ -1,32 +1,30 @@
 function pic() {
-	let pictureParent = document.getElementsByClassName('pictureParent')[0],
-		pictureParentDiv = document.getElementsByClassName('pictureParentDiv'),
-		myModal = document.getElementById('myModal'),
-		closePic = document.getElementsByClassName('closePic')[0],
-		picAction = document.getElementsByClassName('picAction'),
-		modalContent = document.getElementsByClassName('modal_content')[0];
+let imgSmall = document.querySelectorAll('.works .row a'),
+	imgBig = document.querySelectorAll('.works .row a'),
+	overlay = document.createElement('div');
 
-		
-		for (let i=0; i<picAction.length; i++) {
-			picAction[i].addEventListener('click', function(event) {
-				event.preventDefault();
-    			myModal.style.display = "block";
-				let attr = picAction[i].getAttribute('href');
-				modalContent.setAttribute('src', attr);
-			});
-			
+	overlay.classList.add('overlay');
 
-			closePic.addEventListener('click', function() {
-    			myModal.style.display = "none";
-			});
+	document.body.insertBefore(overlay, document.body.children[0]);
+	let img = document.createElement('IMG');
+	img.classList.add('big-img');
+	overlay.insertBefore(img, overlay.children[0]);
 
 
-			pictureParent.addEventListener('click', function(event){
-    			myModal.style.display = "none";
-			});
-		
-		
-		
-}
+	for (let i=0; i<imgSmall.length; i++) {
+		imgSmall[i].addEventListener('click', function(event) {
+			event.preventDefault();
+			overlay.style.display = 'block';
+			img.setAttribute('src', imgSmall[i].href);
+		})
+	}
+
+	document.body.addEventListener('click', function(event){
+		if(event.target==overlay){
+			overlay.style.display = 'none';
+		}
+	})
+
+
 }
 module.exports = pic;

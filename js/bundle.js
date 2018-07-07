@@ -363,7 +363,7 @@ setTimeout(afterMin, 60000);
 module.exports = modalBtn;
 },{}],4:[function(require,module,exports){
 function pic() {
-	let pictureParent = document.getElementsByClassName('pictureParent')[0],
+	/*let pictureParent = document.getElementsByClassName('pictureParent')[0],
 		pictureParentDiv = document.getElementsByClassName('pictureParentDiv'),
 		myModal = document.getElementById('myModal'),
 		closePic = document.getElementsByClassName('closePic')[0],
@@ -391,7 +391,36 @@ function pic() {
 		
 		
 		
+}*/
+
+
+let imgSmall = document.querySelectorAll('.works .row a'),
+	imgBig = document.querySelectorAll('.works .row a');
+
+	let overlay = document.createElement('div');
+
+overlay.classList.add('overlay');
+document.body.insertBefore(overlay, document.body.children[0]);
+let img = document.createElement('IMG');
+img.classList.add('big-img');
+overlay.insertBefore(img, overlay.children[0]);
+
+
+for (let i=0; i<imgSmall.length; i++) {
+	imgSmall[i].addEventListener('click', function(event) {
+		event.preventDefault();
+		overlay.style.display = 'block';
+		img.setAttribute('src', imgSmall[i].href);
+	})
 }
+
+document.body.addEventListener('click', function(event){
+	if(event.target==overlay){
+		overlay.style.display = 'none';
+	}
+})
+
+
 }
 module.exports = pic;
 },{}],5:[function(require,module,exports){
@@ -413,7 +442,7 @@ window.addEventListener('DOMContentLoaded', function () {
 })
 },{"./ajax_form.js":1,"./calc.js":2,"./modalBtn.js":3,"./pic.js":4,"./tabs.js":6,"./timer.js":7}],6:[function(require,module,exports){
 function tabs() {
-	let tab = document.getElementsByClassName('tab'),
+	/*let tab = document.getElementsByClassName('tab'),
 		tabContent = document.getElementsByClassName('tabContent'),
 		tabClick = document.getElementsByClassName('tabClick')[0];
 
@@ -486,6 +515,65 @@ function tabs() {
 
 }
 
+*/
+
+
+  var noClick = document.querySelectorAll('.no_click'),
+          decor = document.querySelector('.decoration'),
+          decorItem = document.getElementsByClassName('decoration_item'),
+          decorA = document.querySelectorAll('.no_click>a'),
+          decorContent = document.querySelectorAll('.tabContent2');
+          //decorContent = document.querySelectorAll('.decor_content');
+
+          console.log(noClick);
+          //console.log(decor);
+          //console.log(decorItem);
+          //console.log(decorA);
+          console.log(decorContent);
+
+
+      function showTabClass(a) {
+        for (var t = 0; t < noClick.length; t++) {
+          noClick[t].classList.remove('after_click');
+          decorContent[t].style.display = 'none';
+        }
+        noClick[a].classList.add('after_click');
+        decorContent[a].style.display = 'block';
+      }
+
+      decor.addEventListener('click', function (event) {
+        var target = event.target;
+        if (target.parentElement.classList.contains('no_click')) {
+          for (var i = 0; i < decorA.length; i++) {
+            if (target == decorA[i]) {
+              showTabClass(i);
+              break;
+            }
+          }
+        }
+      });
+      
+var glazingSlider = document.querySelector('.glazing_slider'),
+          glazingSliderA = document.querySelectorAll('.glazing_block>a'),
+          glazingRow = document.querySelectorAll('.tabContent');
+
+      glazingSlider.addEventListener('click', function (event) {
+        var target = event.target;
+        if (target.parentElement.classList.contains('glazing_block')) {
+          for (var i = 0; i < glazingSliderA.length; i++) {
+            if (target == glazingSliderA[i]) {
+              for (var t = 0; t < glazingSliderA.length; t++) {
+                glazingSliderA[t].classList.remove('active');
+                glazingRow[t].style.display = 'none';
+              }
+              glazingSliderA[i].classList.add('active');
+              glazingRow[i].style.display = 'block';
+              break;
+            }
+          }
+        }
+      });
+    }
 
 module.exports = tabs;
 },{}],7:[function(require,module,exports){

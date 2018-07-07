@@ -1,76 +1,59 @@
 function tabs() {
-	let tab = document.getElementsByClassName('tab'),
-		tabContent = document.getElementsByClassName('tabContent'),
-		tabClick = document.getElementsByClassName('tabClick')[0];
+  var noClick = document.querySelectorAll('.no_click'),
+          decor = document.querySelector('.decoration'),
+          decorItem = document.getElementsByClassName('decoration_item'),
+          decorA = document.querySelectorAll('.no_click>a'),
+          decorContent = document.querySelectorAll('.tabContent2');
+          //decorContent = document.querySelectorAll('.decor_content');
 
-		function hideTabContent (a) {              
-			for (let i = a; i<tabContent.length;i++) {
-				tabContent[i].classList.remove('active');
-				tabContent[i].classList.add('noactive');
-			}
-		}
-
-		hideTabContent(1);
-
-		function showTabContent (b) {
-			if (tabContent[b].classList.contains('noactive')) {
-				hideTabContent(0);
-				tabContent[b].classList.remove('noactive');
-				tabContent[b].classList.add('active');
-			}
-		}
-		
-		tabClick.addEventListener('click', function(event) {
-			let target = event.target;
-			
-			//if (target.className == 'tab') { 
-				for (let j=0; j<tab.length; j++) {
-					let tabA = tab[j].getElementsByTagName('a'),
-						tabIMG = tab[j].getElementsByTagName('img');
-					if (target == tab[j] || tabA[j] || tabIMG[j]) { 
-						showTabContent(j);  
-						break; 
-					}
-				}
-			//}
-		});
+          console.log(noClick);
+          //console.log(decor);
+          //console.log(decorItem);
+          //console.log(decorA);
+          console.log(decorContent);
 
 
-	let tab2 = document.getElementsByClassName('tab2'),
-		tabContent2 = document.getElementsByClassName('tabContent2'),
-		tabClick2 = document.getElementsByClassName('tabClick2')[0];
+      function showTabClass(a) {
+        for (var t = 0; t < noClick.length; t++) {
+          noClick[t].classList.remove('after_click');
+          decorContent[t].style.display = 'none';
+        }
+        noClick[a].classList.add('after_click');
+        decorContent[a].style.display = 'block';
+      }
 
-		function hideTabDecoration (a) {              
-			for (let e = a; e<tabContent2.length;e++) {
-				tabContent2[e].classList.remove('active');
-				tabContent2[e].classList.add('noactive');
-			}
-		}
+      decor.addEventListener('click', function (event) {
+        var target = event.target;
+        if (target.parentElement.classList.contains('no_click')) {
+          for (var i = 0; i < decorA.length; i++) {
+            if (target == decorA[i]) {
+              showTabClass(i);
+              break;
+            }
+          }
+        }
+      });
+      
+var glazingSlider = document.querySelector('.glazing_slider'),
+          glazingSliderA = document.querySelectorAll('.glazing_block>a'),
+          glazingRow = document.querySelectorAll('.tabContent');
 
-		hideTabDecoration(1);
-
-		function showTabDecoration (c) {
-			if (tabContent2[c].classList.contains('noactive')) {
-				hideTabDecoration(0);
-				tabContent2[c].classList.remove('noactive');
-				tabContent2[c].classList.add('active');
-				}
-			}
-		
-		tabClick2.addEventListener('click', function(event) {
-			let target = event.target; 
-				for (let q=0; q<tab2.length; q++) {
-				let tabClickA2 = tab2[q].getElementsByTagName('a'); 
-					if (target == tab2[q] || tabClickA2[q]) { 
-						showTabDecoration(q);  
-						break; 
-					}
-				}
-		})
-
-
-
-}
-
+      glazingSlider.addEventListener('click', function (event) {
+        var target = event.target;
+        if (target.parentElement.classList.contains('glazing_block')) {
+          for (var i = 0; i < glazingSliderA.length; i++) {
+            if (target == glazingSliderA[i]) {
+              for (var t = 0; t < glazingSliderA.length; t++) {
+                glazingSliderA[t].classList.remove('active');
+                glazingRow[t].style.display = 'none';
+              }
+              glazingSliderA[i].classList.add('active');
+              glazingRow[i].style.display = 'block';
+              break;
+            }
+          }
+        }
+      });
+    }
 
 module.exports = tabs;
