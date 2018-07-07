@@ -363,62 +363,31 @@ setTimeout(afterMin, 60000);
 module.exports = modalBtn;
 },{}],4:[function(require,module,exports){
 function pic() {
-	/*let pictureParent = document.getElementsByClassName('pictureParent')[0],
-		pictureParentDiv = document.getElementsByClassName('pictureParentDiv'),
-		myModal = document.getElementById('myModal'),
-		closePic = document.getElementsByClassName('closePic')[0],
-		picAction = document.getElementsByClassName('picAction'),
-		modalContent = document.getElementsByClassName('modal_content')[0];
-
-		
-		for (let i=0; i<picAction.length; i++) {
-			picAction[i].addEventListener('click', function(event) {
-				event.preventDefault();
-    			myModal.style.display = "block";
-				let attr = picAction[i].getAttribute('href');
-				modalContent.setAttribute('src', attr);
-			});
-			
-
-			closePic.addEventListener('click', function() {
-    			myModal.style.display = "none";
-			});
-
-
-			pictureParent.addEventListener('click', function(event){
-    			myModal.style.display = "none";
-			});
-		
-		
-		
-}*/
-
-
 let imgSmall = document.querySelectorAll('.works .row a'),
-	imgBig = document.querySelectorAll('.works .row a');
+	imgBig = document.querySelectorAll('.works .row a'),
+	overlay = document.createElement('div');
 
-	let overlay = document.createElement('div');
+	overlay.classList.add('overlay');
 
-overlay.classList.add('overlay');
-document.body.insertBefore(overlay, document.body.children[0]);
-let img = document.createElement('IMG');
-img.classList.add('big-img');
-overlay.insertBefore(img, overlay.children[0]);
+	document.body.insertBefore(overlay, document.body.children[0]);
+	let img = document.createElement('IMG');
+	img.classList.add('big-img');
+	overlay.insertBefore(img, overlay.children[0]);
 
 
-for (let i=0; i<imgSmall.length; i++) {
-	imgSmall[i].addEventListener('click', function(event) {
-		event.preventDefault();
-		overlay.style.display = 'block';
-		img.setAttribute('src', imgSmall[i].href);
-	})
-}
-
-document.body.addEventListener('click', function(event){
-	if(event.target==overlay){
-		overlay.style.display = 'none';
+	for (let i=0; i<imgSmall.length; i++) {
+		imgSmall[i].addEventListener('click', function(event) {
+			event.preventDefault();
+			overlay.style.display = 'block';
+			img.setAttribute('src', imgSmall[i].href);
+		})
 	}
-})
+
+	document.body.addEventListener('click', function(event){
+		if(event.target==overlay){
+			overlay.style.display = 'none';
+		}
+	})
 
 
 }
@@ -442,82 +411,6 @@ window.addEventListener('DOMContentLoaded', function () {
 })
 },{"./ajax_form.js":1,"./calc.js":2,"./modalBtn.js":3,"./pic.js":4,"./tabs.js":6,"./timer.js":7}],6:[function(require,module,exports){
 function tabs() {
-	/*let tab = document.getElementsByClassName('tab'),
-		tabContent = document.getElementsByClassName('tabContent'),
-		tabClick = document.getElementsByClassName('tabClick')[0];
-
-		function hideTabContent (a) {              
-			for (let i = a; i<tabContent.length;i++) {
-				tabContent[i].classList.remove('active');
-				tabContent[i].classList.add('noactive');
-			}
-		}
-
-		hideTabContent(1);
-
-		function showTabContent (b) {
-			if (tabContent[b].classList.contains('noactive')) {
-				hideTabContent(0);
-				tabContent[b].classList.remove('noactive');
-				tabContent[b].classList.add('active');
-			}
-		}
-		
-		tabClick.addEventListener('click', function(event) {
-			let target = event.target;
-			
-			//if (target.className == 'tab') { 
-				for (let j=0; j<tab.length; j++) {
-					let tabA = tab[j].getElementsByTagName('a'),
-						tabIMG = tab[j].getElementsByTagName('img');
-					if (target == tab[j] || tabA[j] || tabIMG[j]) { 
-						showTabContent(j);  
-						break; 
-					}
-				}
-			//}
-		});
-
-
-	let tab2 = document.getElementsByClassName('tab2'),
-		tabContent2 = document.getElementsByClassName('tabContent2'),
-		tabClick2 = document.getElementsByClassName('tabClick2')[0];
-
-		function hideTabDecoration (a) {              
-			for (let e = a; e<tabContent2.length;e++) {
-				tabContent2[e].classList.remove('active');
-				tabContent2[e].classList.add('noactive');
-			}
-		}
-
-		hideTabDecoration(1);
-
-		function showTabDecoration (c) {
-			if (tabContent2[c].classList.contains('noactive')) {
-				hideTabDecoration(0);
-				tabContent2[c].classList.remove('noactive');
-				tabContent2[c].classList.add('active');
-				}
-			}
-		
-		tabClick2.addEventListener('click', function(event) {
-			let target = event.target; 
-				for (let q=0; q<tab2.length; q++) {
-				let tabClickA2 = tab2[q].getElementsByTagName('a'); 
-					if (target == tab2[q] || tabClickA2[q]) { 
-						showTabDecoration(q);  
-						break; 
-					}
-				}
-		})
-
-
-
-}
-
-*/
-
-
   var noClick = document.querySelectorAll('.no_click'),
           decor = document.querySelector('.decoration'),
           decorItem = document.getElementsByClassName('decoration_item'),
