@@ -112,7 +112,7 @@ let inputs = calcProfile.getElementsByClassName("checkbox");
 	for (let b=0; b<inputs.length; b++) {
 		inputs[b].addEventListener('click', function() {
 			clearAttr();
-			inputs[b].setAttribute('checked', 'cheked');
+			inputs[b].setAttribute('checked', 'cheсked');
 		});
 	}
 //calc_end
