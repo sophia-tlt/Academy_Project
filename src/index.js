@@ -12,7 +12,7 @@ function form() {
 for (let j = 0; j<inputPhone.length; j++) {
 	inputPhone[j].addEventListener('keypress', function() {
         setTimeout(() => {
-            var res = /[^\d]/g.exec(this.value);
+            let res = /[^\d]/g.exec(this.value);
             this.value = this.value.replace(res, '');
         }, 0);
     });
