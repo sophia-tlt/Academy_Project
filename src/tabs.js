@@ -4,13 +4,6 @@ function tabs() {
           decorItem = document.getElementsByClassName('decoration_item'),
           decorA = document.querySelectorAll('.no_click>a'),
           decorContent = document.querySelectorAll('.tabContent2');
-          //decorContent = document.querySelectorAll('.decor_content');
-
-          console.log(noClick);
-          //console.log(decor);
-          //console.log(decorItem);
-          //console.log(decorA);
-          console.log(decorContent);
 
 
       function showTabClass(a) {

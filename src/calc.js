@@ -69,23 +69,22 @@ function calc () {
 		function clear () {
 			for (let k=0; k<balconChoose.length;k++) {
 				bigImgChoose[k].style.display = 'none';
+				balconChoose[k].style.width = '';
 			}
 		};
 
 		for (let t=0;t<balconChoose.length; t++) {
 			balconChoose[t].addEventListener('click', function(){
 				clear();
-				bigImgChoose[t].style.display = 'block';
-				for(let y=0; y<balconChoose.length; y++) {
-						balconChoose[y].style.width = '40%';
-					}
+				bigImgChoose[t].style.display = 'inline-block';
+				balconChoose[t].style.width = '40%';
 			});
 		};
 
 //calc_profile
 		furtherBtn.addEventListener('click', function() {
 			popupCalc.style.display = "none";
-			calcProfile.style.display = "block";
+			calcProfile.style.display = "inline-block";
 			
 			popupChild[3].onclick = function (event) {
     			event.stopPropagation();
@@ -115,6 +114,7 @@ let inputs = calcProfile.getElementsByClassName("checkbox");
 			clearAttr();
 			inputs[b].setAttribute('checked', 'cheked');
 		});
+	}
 //calc_end
 	furtherEndBtn.addEventListener('click', function() {
 		calcProfile.style.display = "none";
@@ -191,7 +191,7 @@ function ajaxForm () {
 	};
 	});
 };
-}
+
 }
 
 	ajaxForm();

@@ -5,8 +5,7 @@ window.addEventListener('DOMContentLoaded', function () {
 	let calc = require('./calc.js');
 	let pic = require('./pic.js');
 	let timer = require('./timer.js');
-
-
+	
 	modalBtn();
 	form();
 	tabs();

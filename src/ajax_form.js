@@ -1,12 +1,12 @@
 function form() {
 	let message = new Object();
-	message.loading = "Ожидание...";
-	message.success = "Спасибо! C Вами свяжется специалист!",
-	message.failure = "Что то пошло не так...";
-	form = document.getElementsByClassName('form'),
-	statusMessage = document.createElement('div'),
-	inputPhone = document.getElementsByName('user_phone');
-	statusMessage.classList.add('status');
+		message.loading = "Ожидание...";
+		message.success = "Спасибо! C Вами свяжется специалист!",
+		message.failure = "Что то пошло не так...";
+	let form = document.getElementsByClassName('form'),
+		statusMessage = document.createElement('div'),
+		inputPhone = document.getElementsByName('user_phone');
+		statusMessage.classList.add('status');
 	
 for (let j = 0; j<inputPhone.length; j++) {
 	inputPhone[j].addEventListener('keypress', function() {
